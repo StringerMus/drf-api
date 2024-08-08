@@ -38,6 +38,9 @@ ALLOWED_HOSTS = [
     '8000-stringermus-drfapi-g2k275hcs8d.ws.codeinstitute-ide.net',
 ]
 
+CSRF_TRUSTED_ORIGINS = [
+    'https://8000-stringermus-drfapi-g2k275hcs8d.ws.codeinstitute-ide.net',
+]
 
 # Application definition
 
