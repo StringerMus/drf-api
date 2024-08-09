@@ -49,7 +49,7 @@ class PostDetail(APIView):
     def get(self, request, pk):
         post = self.get_object(pk)
         serializer = PostSerializer(
-            poat, context={'request': request}
+            post, context={'request': request}
         )
         return Response(serializer.data)
 
