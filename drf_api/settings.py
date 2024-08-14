@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 from pathlib import Path
+import re
 import os
 import dj_database_url
 
@@ -61,7 +62,10 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = 'DEV' in os.environ
 
-ALLOWED_HOSTS = ['localhost', '<your_app_name>.herokuapp.com']
+ALLOWED_HOSTS = [
+    'localhost',
+    os.environ.get('ALLOWED_HOST'),
+    ]
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -101,13 +105,10 @@ MIDDLEWARE = [
     'allauth.account.middleware.AccountMiddleware',
 ]
 
-if 'CLIENT_ORIGIN' in os.environ:
-    CORS_ALLOWED_ORIGINS = [
-        os.environ.get('CLIENT_ORIGIN')
-    ]
-else:
+if 'CLIENT_ORIGIN_DEV' in os.environ:
+    extracted_url = re.match(r'^.+-', os.environ.get('CLIENT_ORIGIN_DEV', ''), re.IGNORECASE).group(0)
     CORS_ALLOWED_ORIGIN_REGEXES = [
-        r"^https://.*\.gitpod\.io$",
+        rf"{extracted_url}(eu|us)\d+\w\.gitpod\.io$",
     ]
 
 CORS_ALLOW_CREDENTIALS = True
