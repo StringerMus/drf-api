@@ -64,7 +64,7 @@ DEBUG = 'DEV' in os.environ
 
 ALLOWED_HOSTS = [
     'localhost',
-    'drf-api-mus.herokuapp.com',
+    'drf-api-mus-4c0e6be5fa63.herokuapp.com',
     os.environ.get('ALLOWED_HOST'),
     ]
 
