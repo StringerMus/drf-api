@@ -18,18 +18,16 @@ from django.urls import path, include
 from .views import root_route, logout_route
 
 urlpatterns = [
-    path('', root_route),
-    path('admin/', admin.site.urls),
-    path('api-auth/', include('rest_framework.urls')),
-    # our logout route has to be above the default one to be matched first
-    path('dj-rest-auth/logout/', logout_route),
-    path('dj-rest-auth/', include('dj_rest_auth.urls')),
-    path(
-        'dj-rest-auth/registration/', include('dj_rest_auth.registration.urls')
-    ),
-    path('', include('profiles.urls')),
-    path('', include('posts.urls')),
-    path('', include('comments.urls')),
-    path('', include('likes.urls')),
-    path('', include('followers.urls')),
+    path('', root_route),  # Root route
+    path('admin/', admin.site.urls),  # Admin route
+    path('api-auth/', include('rest_framework.urls')),  # DRF login/logout
+    path('dj-rest-auth/logout/', logout_route),  # Custom logout route
+    path('dj-rest-auth/', include('dj_rest_auth.urls')),  # DJ Rest Auth routes
+    path('dj-rest-auth/registration/', include('dj_rest_auth.registration.urls')),  # DJ Rest Auth registration
+    path('accounts/', include('allauth.urls')),  # Allauth routes for account management
+    path('', include('profiles.urls')),  # Profile routes
+    path('', include('posts.urls')),  # Post routes
+    path('', include('comments.urls')),  # Comment routes
+    path('', include('likes.urls')),  # Like routes
+    path('', include('followers.urls')),  # Follower routes
 ]
